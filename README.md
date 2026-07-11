@@ -12,14 +12,6 @@ The simplest build system I can come up with.
 
 ## Explanation
 
-The essential property of a build system is minimality.
-
-> A build system is minimal if it executes tasks at most once per build
-> and only if they transitively depend on inputs that changed since the previous build.
-
-Put another way, the distinction between "a program that builds code" and "a build system"
-is whether that program successfully avoids repeated work.
-
 The central abstraction of this library is a `Target`. A target represents a unit of code that will
 result in a side effect. 
 - For a target that compiles `.java` files the side effect might be writing `.class`
@@ -232,13 +224,21 @@ void main(String[] cliArgs) throws Exception {
 }
 ```
 
+The essential property of a build system is minimality.
+
+> A build system is minimal if it executes tasks at most once per build
+> and only if they transitively depend on inputs that changed since the previous build.
+
+Put another way, the distinction between "a program that builds code" and "a build system"
+is whether that program successfully avoids repeated work.
+
 Now we have a perfectly functional build, but it is not minimal. If we were to run 
 the `compile` target it would always compile from scratch, regardless of if the source
 has changed since we last compiled.
 
 To deal with this, we can make our own implementations of `Target`. These can implement any sort of
 up-to-dated-ness check that they want to. The `make` strategy of comparing file timestamps
-is available via `FileTimes.outputIsNewerThanInput`.
+is available via `FileTimes.outputIsNewerThanInput`, but you can implement your own.
 
 ```java 
 import module dev.mccue.tools.jdk;
