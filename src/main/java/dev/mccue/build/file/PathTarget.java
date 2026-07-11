@@ -9,7 +9,7 @@ import java.nio.file.*;
 public interface PathTarget extends Target {
     /// @return The path produced as a result of building this target.
     Path path();
-    
+
     static PathTarget cleanDirectory(Path p) {
         return CleanDirectory.of(p);
     }
