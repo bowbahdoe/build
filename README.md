@@ -4,7 +4,7 @@
 <dependency>
     <groupId>dev.mccue</groupId>
     <artifactId>build</artifactId>
-    <version>2026.07.11</version>
+    <version>2026.07.11.1</version>
 </dependency>
 ```
 

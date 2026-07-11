@@ -18,15 +18,15 @@ public final class InputFiles extends AbstractList<Path> {
         this.paths = List.copyOf(paths);
     }
 
-    static InputFiles withExtension(Path root, String extension) throws IOException {
+    public static InputFiles withExtension(Path root, String extension) throws IOException {
         return inFileTree(root, path -> Files.isRegularFile(path) && path.getFileName().toString().endsWith(extension));
     }
 
-    static InputFiles inFileTree(Path root) throws IOException {
+    public static InputFiles inFileTree(Path root) throws IOException {
         return inFileTree(root, _ -> true);
     }
 
-    static InputFiles inFileTree(Path root, Predicate<Path> keep) throws IOException {
+    public static InputFiles inFileTree(Path root, Predicate<Path> keep) throws IOException {
         var visitor = new SimpleFileVisitor<Path>() {
             final List<Path> matches = new ArrayList<>();
             @Override
@@ -42,11 +42,11 @@ public final class InputFiles extends AbstractList<Path> {
         return new InputFiles(visitor.matches);
     }
 
-    static InputFiles of(Path... paths) {
+    public static InputFiles of(Path... paths) {
         return new InputFiles(List.of(paths));
     }
 
-    static InputFiles of(List<Path> paths) {
+    public static InputFiles of(List<Path> paths) {
         return new InputFiles(List.copyOf(paths));
     }
 
